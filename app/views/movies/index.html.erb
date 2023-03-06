@@ -1,0 +1,21 @@
+<%= form_with url: movies_path, method: :get, class: 'd-flex m-5' do %>
+  <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Find A Movie" %>
+  <%= submit_tag "Search", class: "btn btn-primary" %>
+<% end %>
+
+<div class="row justify-content-center">
+    <ul>
+    <% Movie::GENRES.each do |genre| %>
+      <li><%= link_to genre, movies_path(genre: genre), class: "list-inline" %></li>
+    <% end %>
+    </ul>
+    <div class="col-8">
+        <div id="movies">
+            <% @movies.each do |movie| %>
+                <h4><%= movie.title %></h4>
+                <p><%= movie.synopsis %></p>
+                <small>Genre: <%= movie.genre %> | Director: <%= movie.director.full_name %></small>
+            <% end %>
+        </div>
+    </div>
+</div>
